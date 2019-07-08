@@ -213,17 +213,15 @@ if __name__ == '__main__':
             print("step: %4d, d_loss: %4.3f, g_loss: %4.3f " % (i, d_loss_value, g_loss_value))
             # logging.info("step: %4d, d_loss: %4.3f, g_loss: %4.3f " % (step, d_loss_value, g_loss_value))
             loss.append(output_value[2:4])
-            if i % 200 == 0:
+            
+            if i % 5 == 0:
                 saver.save(sess, './checkpoints/generator.ckpt')
                 z_dim = np.random.standard_normal((128, 100))
                 sample = sess.run(generated_img, feed_dict={z_placeholder:z_dim})
-                
-                plt.imshow(sample[20].reshape((32,32)),cmap='gray')
-                plt.imshow(sample[21].reshape((32,32)),cmap='gray')
-                plt.imshow(sample[22].reshape((32,32)),cmap='gray')
-                plt.show()
+                plt.imshow(sample[0].reshape((32,32)),cmap='gray')
+                plt.savefig('./imgs/%d.jpg' % (i))
+                # plt.show()
           
-
                 
                 
             
